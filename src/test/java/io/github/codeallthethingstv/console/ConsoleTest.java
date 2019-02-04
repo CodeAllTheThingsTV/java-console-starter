@@ -31,6 +31,19 @@ public class ConsoleTest {
         thenConsoleOutputIs("Please enter some value: ");
     }
 
+
+    @Test
+    public void testReadInvalidLongReturnsEmptyOptional() {
+        givenInput("notALong");
+        assertThat(when().readLong()).isNotPresent();
+    }
+
+    @Test
+    public void testReadLongReturnsLongOptional() {
+        givenInput("1000");
+        assertThat(when().readLong()).isPresent().contains(1000L);
+    }
+
     @Test
     public void testReadInvalidLongReturnsNull() {
         givenInput("notALong");
@@ -81,15 +94,39 @@ public class ConsoleTest {
     }
 
     @Test
+    public void testReadInvalidIntegerReturnsEmptyOptional() {
+        givenInput("notAnInteger");
+        assertThat(when().readInteger()).isNotPresent();
+    }
+
+    @Test
+    public void testReadIntegerReturnsIntegerOptional() {
+        givenInput("1000");
+        assertThat(when().readInteger()).isPresent().contains(1000);
+    }
+
+    @Test
     public void testReadInvalidDoubleReturnsNull() {
         givenInput("notADouble");
         assertThat(when().readDoubleOrNull()).isNull();
     }
 
     @Test
+    public void testReadInvalidDoubleReturnsEmptyOptional() {
+        givenInput("notADouble");
+        assertThat(when().readDouble()).isNotPresent();
+    }
+
+    @Test
     public void testReadDoubleReturnsDouble() {
         givenInput("1000.45");
         assertThat(when().readDoubleOrNull()).isEqualTo(1000.45d);
+    }
+
+    @Test
+    public void testReadDoubleReturnsDoubleOptional() {
+        givenInput("1000.45");
+        assertThat(when().readDouble()).isPresent().contains(1000.45d);
     }
 
     private void givenInput(final String input) {

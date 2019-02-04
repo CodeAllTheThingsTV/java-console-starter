@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.util.Optional;
 import java.util.function.Function;
 
 public class Console {
@@ -24,6 +25,14 @@ public class Console {
         return read();
     }
 
+    public Optional<Long> readLong() {
+        return Optional.ofNullable(readLongOrNull());
+    }
+
+    public Optional<Long> readLong(final String text, final Object... args) {
+        return Optional.ofNullable(readLongOrNull(text, args));
+    }
+
     public Long readLongOrNull() {
         return fallbackNull(Long::parseLong, read());
     }
@@ -33,6 +42,15 @@ public class Console {
         return readLongOrNull();
     }
 
+
+    public Optional<Integer> readInteger() {
+        return Optional.ofNullable(readIntegerOrNull());
+    }
+
+    public Optional<Integer> readInteger(final String text, final Object... args) {
+        return Optional.ofNullable(readIntegerOrNull(text, args));
+    }
+
     public Integer readIntegerOrNull() {
         return fallbackNull(Integer::parseInt, read());
     }
@@ -40,6 +58,14 @@ public class Console {
     public Integer readIntegerOrNull(final String text, final Object... args) {
         write(text, args);
         return readIntegerOrNull();
+    }
+
+    public Optional<Double> readDouble() {
+        return Optional.ofNullable(readDoubleOrNull());
+    }
+
+    public Optional<Double> readDouble(final String text, final Object... args) {
+        return Optional.ofNullable(readDoubleOrNull(text, args));
     }
 
     public Double readDoubleOrNull() {
